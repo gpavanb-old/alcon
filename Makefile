@@ -5,7 +5,7 @@ F90=gfortran
 PGPLOT = -L/usr/local/pgplot -lpgplot -lX11
 # for the PGPLOT software package, look at
 # http://www.astro.caltech.edu/~tjp/pgplot/
-
+FLAGS=-g
 OBJDIR=obj
 LIBDIR=lib
 OBJ_FOR_LIB=zibconst.o linalg_alcon1.o alcon1.o binder.o 
@@ -14,12 +14,12 @@ OBJ_DEST=$(addprefix $(OBJDIR)/,$(OBJ_FOR_LIB))
 %.o : %.f
 	@mkdir -p obj
 	@echo "Compiling $*.f ..."
-	@$(F90) -ffixed-form -c $*.f -o $(OBJDIR)/$*.o 
+	@$(F90) $(FLAGS) -ffixed-form -c $*.f -o $(OBJDIR)/$*.o 
 
 %.o : %.f90
 	@mkdir -p obj
 	@echo "Compiling $*.f90 ..."
-	@$(F90) -c $*.f90 -o $(OBJDIR)/$*.o
+	@$(F90) $(FLAGS) -c $*.f90 -o $(OBJDIR)/$*.o
  
 libalcon.a : $(OBJ_FOR_LIB)
 	@mkdir -p lib
